@@ -17,7 +17,12 @@ fn get_form(_request: &mut Request) -> IronResult<Response> {
     response.set_mut(mime!(Text/Html; Charset=Utf8));
     response.set_mut(
         r#"
-hello !!
+<title>GCD Calculator</title>
+<form action="/gcd" method="post">
+<input type="text" name="n"/>
+<input type="text" name="n"/>
+<button type="submit">Compute GCD</button>
+</form>
 "#,
     );
 
