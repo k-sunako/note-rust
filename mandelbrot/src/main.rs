@@ -1,6 +1,8 @@
 extern crate num;
 use num::Complex;
 
+use std::str::FromStr;
+
 // fn square_loop(mut x: f64) {
 //     loop {
 //         x = x * x;
@@ -33,6 +35,41 @@ fn escape_time(c: Complex<f64>, limit: u32) -> Option<u32> {
     }
 
     None
+}
+
+fn parse_pair<T: FromStr>(s: &str, separator: char) -> Option<(T, T)> {
+    match s.find(separator) {
+        None => None,
+        Some(index) => match (T::from_str(&s[..index]), T::from_str(&s[index + 1..])) {
+            (Ok(l), Ok(r)) => Some((l, r)),
+            _ => None,
+        },
+    }
+}
+
+#[test]
+fn test_parse_pair() {
+    assert_eq!(parse_pair::<i32>("", ','), None);
+    assert_eq!(parse_pair::<i32>("20", ','), None);
+}
+
+fn parse_complex(s: &str) -> Option<Complex<f64>> {
+    match parse_pair(s, ',') {
+        Some((re, im)) => Some(Complex { re, im }),
+        None => None,
+    }
+}
+
+#[test]
+fn test_parse_complex() {
+    assert_eq!(
+        parse_complex("1.25,-0.0625"),
+        Some(Complex {
+            re: 1.25,
+            im: -0.025
+        })
+    );
+    assert_eq!(parse_complex(",-0.0625"), None);
 }
 
 fn main() {
