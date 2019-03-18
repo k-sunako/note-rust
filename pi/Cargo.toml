@@ -1,0 +1,9 @@
+[package]
+name = "pi"
+version = "0.1.0"
+authors = ["k-sunako <dd.kazumasa@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+ramp = "0.5.1"
+partial_application = "0.1.0"
