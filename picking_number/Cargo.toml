@@ -1,0 +1,7 @@
+[package]
+name = "picking_number"
+version = "0.1.0"
+authors = ["k-sunako <dd.kazumasa@gmail.com>"]
+edition = "2018"
+
+[dependencies]
